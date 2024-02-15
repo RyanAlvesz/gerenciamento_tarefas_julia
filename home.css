@@ -1,0 +1,54 @@
+*{
+    margin: 0;
+    padding: 0;
+    flex-direction: column;
+}
+
+.inicio{
+    display: flex;
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    height: 10vh;
+}
+
+.inicio p{
+    display: flex;
+    place-content: center;
+    font-size: 3vh;
+    font-family: 'Bebas Neue', sans-serif;
+}
+
+.inicio img{
+    display: flex;
+    width: 7vh;
+    height: 7vh;
+    padding: 1.5vh 3vh;
+}
+
+
+body{
+    display: flex;
+    background-color: rgb(188, 235, 253);
+}
+
+.cabecalho{
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    padding: 5vh;
+    gap: 5vh;
+}
+
+button{
+    border: none;
+    background-color: white;
+    border-radius: 1vh;
+    padding: 1vh;
+}
+
+.fazer{
+    display: flex;
+    background-color: black;
+    z-index: -1;
+}
