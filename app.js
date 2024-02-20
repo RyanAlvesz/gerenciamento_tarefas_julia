@@ -1,59 +1,38 @@
-'use strict'
-
-document.getElementById('mostrarCard').addEventListener('click', function() {
-    document.getElementById('card').style.display = 'flex';
-});
-
-document.getElementById('fechar-card').addEventListener('click', function() {
-    document.getElementById('card').style.display = 'none';
-});
+async function cadastrar(){
 
 
-// Outro jeito de criar função
-// const botaoMostrarCard = document.getElementById('mostrarCard') 
-// const card = document.getElementById('card')
-// const criarCard = () => {
-//     card.style.display = 'flex'
+    const nome = document.getElementById('nome').value;
+    const email = document.getElementById('email').value;
+    const senha = document.getElementById('senha').value; 
 
-// } 
-
-// botaoMostrarCard.addEventListener('click', criarCard) 
-
-const containerCards = document.getElementById('cards')
-
-// Função para obter as tarefas da API
-async function getTarefas(){
-    let url = 'http://localhost:5080/tarefas'
-
-    // Função para fazer uma solicitação HTTP GET para url acima
-    const responseTarefas = await fetch(url)
-
-    // Convertida em JSON e atribuida a variavel (listTarefas)
-    const listTarefas = await responseTarefas.json()
-
-    listTarefas.forEach((tarefa)=>{
-
-// Criando um novo elemento container para as informações da tarefa
-
-        const container = document.createElement('div');
-        container.className = 'card';
-
-        console.log(tarefa.descrição)
-        container.innerHTML = `
-            <h2>${tarefa.descrição}</h2>
-            <p>${tarefa.dataConclusão}</p>
+    console.log(email);
         
-        `
+    if(nome === '' || senha === '' ||email ===''){
+        alert('Por favor, preencha todos os campos!!')
+        return false;
+    }
+
+    try {
+
+        const users = await fetch('http://localhost:5080/usuario');
+
+        const listUsers = await users.json();
         
-        containerCards.appendChild(container)
-    
-    })
+        listUsers.forEach((user) => {
+            if(email === user.email && senha === user.senha){
+                alert('Usuário Cadastrado com Sucesso !!');
+                window.location.href = '.'
+                return true;
+            }
+        })
+        alert('Usuário não encontrado!!')
+        return false;
 
- 
+    } catch (error) {
+        alert('Erro ao acessar a API!')
+        console.error(error);
+    }
 
-    
 }
 
-window.onload = () => {
-    getTarefas()
-}
+validarLogin()
