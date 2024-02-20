@@ -1,3 +1,4 @@
+
 'use strict'
 
 document.getElementById('mostrarCard').addEventListener('click', function() {
@@ -32,7 +33,7 @@ async function getTarefas(){
         console.log(tarefa.descrição)
         container.innerHTML = `
             <h1>${tarefa.titulo}</h1>
-            <h2>${tarefa.descrição}</h2>
+            <h2>${tarefa.descricao}</h2>
             <p>${tarefa.dataConclusão}</p>
         
         `
@@ -44,38 +45,36 @@ async function getTarefas(){
 }
 
 
-// async function addCard() {
-//     const titulo = document.querySelector ('#card input[type="text"]').value
-//     const data = document.querySelector('#card input[type="date"]').value;
-//     const descricao = document.querySelector('#card textarea').value;
+async function addCard() {
+    const titulo = document.getElementById('titulo').value
+    const data = document.getElementById('data').value
+    const descricao = document.getElementById('desc').value
 
-//     const novoCard = {
-//         title: titulo,
-//         dueDate: data,
-//         description: descricao
-//     };
+    const novoCard = {
+        titulo: titulo,
+        dataConclusão: data,
+        descricao: descricao
+    };
 
-//     const url = 'http://localhost:5080/tarefas'
+    const url = 'http://localhost:5080/tarefas'
 
-//     try{
-//         const response = await fetch(url, {
-//             method: 'POST',
-//             headers: {
-//                 'Content-Type': 'application/json'
-//             },
-//             body: JSON.stringify(novoCard)
+    try{
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(novoCard)
     
-//     })
+    })}
+    catch(error){
+        console.error(error)
+    }
 
-//     if(response.ok){
+        console.log("Tarefa adicionada")
+        containerCards.innerHTML = '';
+        await getTarefas();
 
-//         console.log("Tarefa adicionada")
-//         containerCards.innerHTML = '';
-//         await getTarefas();
-//     } else {
-//         console.error("Erro ao adicionar tarefa")
-
-//     }
 
 
 
@@ -83,7 +82,7 @@ window.onload = () => {
     getTarefas()
     
 }
- 
+    }
 
 
 
