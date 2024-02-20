@@ -20,11 +20,14 @@ async function validarLogin(){
         listUsers.forEach((user) => {
             if(email === user.email && senha === user.senha){
                 alert('Usuário Logado com Sucesso !!');
+                window.location.href = './home.html'
                 return true;
             }
         })
-        alert('Usuário não encontrado!!')
-        return false;
+
+
+
+       
 
     } catch (error) {
         alert('Erro ao acessar a API!')
