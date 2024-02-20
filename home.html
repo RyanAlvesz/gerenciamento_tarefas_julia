@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="home.css">
     <script src="home.js"></script>
     <title>Sistema de Gerenciamento de Tarefas</title>
+    <script src="app.js" defer></script>
+
 </head>
 
 <body>
@@ -17,14 +19,19 @@
         </div>
     </header>
 
-        <div class="cabecalho">
-            <h2>Tarefas</h2>
-        </div>
+    <main>
 
 
         <!--Botão para adicionar nova tarefa -->
-        <button id="mostrarCard">Nova tarefa</button>
+        <button id="mostrarCard" class="nova-tarefa">
+            <span>Nova Tarefa</span>
+        </button>
         <div class="card" id="card">
+
+
+            <button id="fechar-card" class="fechar-card">
+                <img src="./img/close.svg" alt="">
+            </button>
 
             <h2>Adicionar nova Tarefa</h2>
 
@@ -36,23 +43,38 @@
                 </label>
                 <!-- Data da tarefa-->
                 <p>Data</p>
-                <input type="date" class="w-full" required min="2024-2-15" max="2025-2-15" value="2024-2-15">
-                
+                <input type="date" class="w-full" required min="2024-02-15" max="2025-02-15" value="2024-0 2-15">
+
                 <!-- Desscrição da tarefa -->
                 <label>
                     <p>Descrição (opcional)</p>
                     <textarea placeholder="descreva sua tarefa" class="w-full"></textarea>
                 </label>
-    
+
                 <!-- Botão para criar nova tarefa -->
-                <button type="submit" class="btn mt-5"></button>
-    
+                <button type="submit" class="btn mt-5">Criar tarefa nova</button>
+
             </form>
 
         </div>
 
 
-        <script src="app.js"></script>
+        <!-- Container das tarefas  -->
+        <div class="container" id="cards">
+            <h2>Kaike e Júlia</h2>
+            <p>17/06/2023</p>
+            <p>Descrição</p>
+            <div class="concluido">
+                <input id="concluido" class="opacity-0 h-0 w-0" type="checkbox">
+                <p>Concluído</p>
+            </div>
+
+        </div>
+
+
+
+    </main>
+
 </body>
 
 
