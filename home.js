@@ -1,113 +1,123 @@
-
 'use strict'
 
-document.getElementById('mostrarCard').addEventListener('click', function() {
+document.getElementById('mostrarCard').addEventListener('click', function () {
     document.getElementById('card').style.display = 'flex';
 });
 
-document.getElementById('fechar-card').addEventListener('click', function() {
+document.getElementById('fechar-card').addEventListener('click', function () {
     document.getElementById('card').style.display = 'none';
 });
 
 const button = document.getElementById('button')
-
 const containerCards = document.getElementById('cards')
 
+// Array de tarefas para teste (o array certo virá da api)
+let tarefas = [
+
+    // JSON com uma tarefa
+    {
+        titulo: 'Teste',
+        descricao: 'Tarefa teste',
+
+        // Formato de data certo  'ano-mes-dia' 
+        dataConclusao: '2024-02-15'
+    }
+
+]
+
 // Função para obter as tarefas da API
-async function getTarefas(){
-    let url = 'http://localhost:5080/tarefas'
+async function getTarefas() {
 
-    // Função para fazer uma solicitação HTTP GET para url acima
-    const responseTarefas = await fetch(url)
 
-    // Convertida em JSON e atribuida a variavel (listTarefas)
-    const listTarefas = await responseTarefas.json()
+    try {
 
-    listTarefas.forEach((tarefa)=>{
+        // Verificar a URL certa !!!
+        let url = 'http://localhost:5080/tarefas'
 
-// Criando um novo elemento container para as informações da tarefa
+        // Função para fazer uma solicitação HTTP GET para url acima
+        const responseTarefas = await fetch(url)
 
-        const container = document.createElement('div');
-        container.className = 'cards';
+        // Convertida em JSON e atribuida a variavel (listTarefas)
+        const listTarefas = await responseTarefas.json()
 
-        console.log(tarefa.descrição)
-        container.innerHTML = `
-            <h1>${tarefa.titulo}</h1>
-            <h2>${tarefa.descricao}</h2>
-            <p>${tarefa.dataConclusão}</p>
+        listTarefas.forEach((tarefa) => {
+
+            // Criando um novo elemento container para as informações da tarefa
+
+            const container = document.createElement('div');
+            container.className = 'cards';
+
+            container.innerHTML = `
+                <h2>${tarefa.titulo}</h2>
+                <span>${tarefa.descricao}</span>
+                <p>${tarefa.dataConclusao}</p>
+            `
+
+            containerCards.appendChild(container)
+
+        })    
+
+    } catch (error) {
         
-        `
-        
-        containerCards.appendChild(container)
-    
-    })
+    }
     
 }
 
-
 async function addCard() {
+
+    // Recebendo os dados digitados
     const titulo = document.getElementById('titulo').value
     const data = document.getElementById('data').value
     const descricao = document.getElementById('desc').value
 
-    const novoCard = {
-        titulo: titulo,
-        dataConclusão: data,
-        descricao: descricao
-    };
+    // Se as informações estiverem vazias, não iremos criar o card
+    if(titulo == '' || data == '', descricao == ''){
 
-    const url = 'http://localhost:5080/tarefas'
+        // Criando uma caixa de alerta, avisando ao usuário para preencher todas as informações
+        alert('Preencha todas as informações')
 
-    try{
-        const response = await fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(novoCard)
+    } else {
+
+        // Criando um objeto card com os dados inseridos
+        const novoCard = {
+            titulo: titulo,
+            dataConclusão: data,
+            descricao: descricao
+        }
+        
+        try {
+            
+            // Verificar a URL certa !!!
+            const url = 'http://localhost:5080/tarefas/'
+            
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(novoCard)
+            })
+
+        }
     
-    })}
-    catch(error){
-        console.error(error)
-    }
-
-        console.log("Tarefa adicionada")
+        catch (error) {
+            console.error(error)
+        }
+    
         containerCards.innerHTML = '';
         await getTarefas();
+        window.onload = () => {
+            getTarefas()
+        }
 
-
-
-
-window.onload = () => {
-    getTarefas()
-    
-}
     }
 
+}
 
+// Ao meu ver, se nada estiver errrado, eu acho que o front está certinho, mas tem que fazer teste ainda com a API funcionando
 
-
-
-
-    
-    // Chamar a função para adicionar um novo card
-    addCard();
-    
-
-    
-    //get nas informações 
-
-
-    // criar url para fetch 
-
-    // post dentro do fetch 
-
-
-
-
-
-
-
-
+// get nas informações 
+// criar url para o get e para o post
+// post dentro do fetch 
 
 button.addEventListener('click', addCard);

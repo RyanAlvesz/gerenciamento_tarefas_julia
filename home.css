@@ -1,13 +1,45 @@
 *{
     margin: 0;
     padding: 0;
-    flex-direction: column;
+}
+
+body{
+    height: 100vh;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    background-color: rgb(188, 235, 253);
+    font-family: 'Bebas Neue', sans-serif;
+}
+
+header{
+    display: flex;
+    background-color: white;
+    align-items: center;
+    height: 10vh;
+}
+
+header p{
+    font-size: 3vh;
+    font-family: 'Bebas Neue', sans-serif;
+}
+
+header img{
+    width: 7vh;
+    height: 7vh;
+    padding: 1.5vh 3vh;
 }
 
 main{
     display: flex;
-    padding: 24px;
+    flex-direction: column;
+    padding: 32px;
+    position: relative;
+    gap: 24px;
+}
 
+button{
+    border: none;
+    cursor: pointer;
 }
 
 /* Card para adicionar nova tarefa */
@@ -23,7 +55,6 @@ main{
     color: black;
     box-shadow: 0px 0px 5px 0px #7ecbe2;
     border-radius: 12px;
-  
 }
 
 .fechar-card{
@@ -39,66 +70,105 @@ main{
 .fechar-card img{
     width: 100%;
     height: 100%;
-
-
 }
+
 .card {
+    display: none;
     flex-direction: column;
     align-items: center;
-   justify-content: center;
-    display: none;
+    justify-content: space-between;
     position: fixed;
     z-index: 1;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: rgb(221, 244, 248);
+    inset: 0;
+    margin: auto;
     padding: 20px;
-    border-radius: 5px;
+    background-color: rgb(221, 244, 248);
+    border-radius: 8px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-    width: 60vh;
-    height: 30vh;
+    width: 50vh;
+    min-height: 55vh;
+    max-height: 60vh;
+    gap: 24px;
+}
+
+.card > h2{
+    font-size: 1.45rem;
+}
+
+.card form{
+    display: grid;
+    flex-grow: 1;
+    width: 100%;
+    gap: 12px;
+    grid-template-rows: 1fr 1fr 3fr 1fr;
+}
+
+.card form label{
+    width: 100%;
+    display: grid;
+    grid-template-rows: min-content 1fr;
+    gap: 8px;
+    font-size: 1.2rem;
+}
+
+.card form label input, .card form label textarea{
+    padding: 8px;
+    border-radius: 8px;
+    border: none;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+}
+
+.card form label input::placeholder, .card form label textarea::placeholder, .card form label input, .card form label textarea{
+    font-size: 1rem;
+    color: black;
+}
+
+form label input:focus, form label textarea:focus{
+    outline: none;
+}
+
+.card form label textarea{
+    resize: none;
+    padding: 8px;
+}
+
+.card form button{
+    border: none;
+    border-radius: 1    2px;
+    place-self: center center;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+    width: 60%;
+    height: 80%;
+    font-size: 1rem;
+    font-weight: 600;
 }
 
 .container{
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
     flex-wrap: wrap;
-    padding: 20px;
-    margin: 50px;
-    gap: 20px;
-   
+    gap: 20px;  
 }
 
-
-
-.inicio{
-    display: flex;
+.cards{
+    padding: 12px;
+    min-height: 25vh;
+    min-width: 24vw;
+    border-radius: 5px;
     background-color: white;
     display: flex;
-    flex-direction: row;
-    height: 10vh;
+    flex-direction: column;
+    gap: 6px;
+    border: solid rgb(24, 137, 182) 0.5px;
+    box-shadow: 0px 0px 5px 0px #7ecbe2;
 }
 
-.inicio p{
-    display: flex;
-    place-content: center;
-    font-size: 3vh;
-    font-family: 'Bebas Neue', sans-serif;
+.cards h2{
+    font-size: 2rem;
+    color: black;
 }
 
-.inicio img{
-    display: flex;
-    width: 7vh;
-    height: 7vh;
-    padding: 1.5vh 3vh;
-}
-
-
-body{
-    display: flex;
-    background-color: rgb(188, 235, 253);
+.cards p{
+    padding-top: 6px;
 }
 
 .cabecalho{
@@ -109,37 +179,10 @@ body{
     gap: 5vh;
 }
 
-button{
-    border: none;
-
-}
-
 .fazer{
     display: flex;
     background-color: black;
     z-index: -1;
-}
-
-.cards{
-    width: 180px;
-    height: 180px;
-    background-color: white;
-    opacity: 70%;
-    border: solid rgb(24, 137, 182) 1px;
-}
-
-.btn-criar{
-    background-color: white;
-    border: solid black 1px;
-    padding: 3px;
-    border-radius: 5px;
-}
-
-form{
-    display: flex;
-    align-items: start;
-    gap: 6px;
-    
 }
 
 
